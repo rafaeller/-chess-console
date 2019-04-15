@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Text;
 using board;
+using chess;
 
 namespace screen
 {
@@ -28,6 +29,14 @@ namespace screen
                 Console.WriteLine();
             }
             Console.WriteLine("  A B C D E F G H");
+        }
+
+        public static PositionChess ReadPositionChess()
+        {
+            string s = Console.ReadLine();
+            char col = s[0];
+            int row = int.Parse(s[1].ToString());
+            return new PositionChess(col, row);
         }
 
         public static void PrintPiece(Piece piece)
