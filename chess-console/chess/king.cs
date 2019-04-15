@@ -26,7 +26,7 @@ namespace chess
             Position pos = new Position(0, 0);
 
             //up
-
+            pos.DefineValues(pos.Row, pos.Col);
         }
     }
 }
