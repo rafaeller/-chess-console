@@ -23,6 +23,22 @@ namespace board
             QteMoves++;
         }
 
+        public bool ExistsPosibleMoves() {
+            bool[,] mat = PosibleMoves();
+            for (int i = 0; i < Brd.Rows; i++) {
+                for (int j = 0; j < Brd.Cols; j++) {
+                    if (mat[i,j]) {
+                        return true;
+                    } 
+                }
+            }
+            return false;
+        }
+
+        public bool CanMoveTo(Position pos) {
+            return PosibleMoves()[pos.Row, pos.Col];
+        }
+
         public abstract bool[,] PosibleMoves();
     }
 }

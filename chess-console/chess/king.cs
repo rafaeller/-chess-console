@@ -26,7 +26,46 @@ namespace chess
             Position pos = new Position(0, 0);
 
             //up
-            pos.DefineValues(pos.Row, pos.Col);
+            pos.DefineValues(Position.Row - 1, Position.Col);
+            if (Brd.ValidPosition(pos) && CanMove(pos)) {
+                mat[pos.Row, pos.Col] = true;
+            }
+            //up rigth
+            pos.DefineValues(Position.Row - 1, Position.Col + 1);
+            if (Brd.ValidPosition(pos) && CanMove(pos)) {
+                mat[pos.Row, pos.Col] = true;
+            }
+            //rigth
+            pos.DefineValues(Position.Row, Position.Col + 1);
+            if (Brd.ValidPosition(pos) && CanMove(pos)) {
+                mat[pos.Row, pos.Col] = true;
+            }
+            //down rigth
+            pos.DefineValues(Position.Row + 1, Position.Col + 1);
+            if (Brd.ValidPosition(pos) && CanMove(pos)) {
+                mat[pos.Row, pos.Col] = true;
+            }
+            //down
+            pos.DefineValues(Position.Row + 1, Position.Col);
+            if (Brd.ValidPosition(pos) && CanMove(pos)) {
+                mat[pos.Row, pos.Col] = true;
+            }
+            //down left
+            pos.DefineValues(Position.Row + 1, Position.Col  - 1);
+            if (Brd.ValidPosition(pos) && CanMove(pos)) {
+                mat[pos.Row, pos.Col] = true;
+            }
+            //left
+            pos.DefineValues(Position.Row, Position.Col - 1);
+            if (Brd.ValidPosition(pos) && CanMove(pos)) {
+                mat[pos.Row, pos.Col] = true;
+            }
+            //up left
+            pos.DefineValues(Position.Row - 1, Position.Col - 1);
+            if (Brd.ValidPosition(pos) && CanMove(pos)) {
+                mat[pos.Row, pos.Col] = true;
+            }
+            return mat;
         }
     }
 }

@@ -13,16 +13,34 @@ namespace chess_console
 
             while (!Game1.Finished)
             {
-                Console.Clear();
-                Screen.PrintBoard(Game1.Brd);
+                try {
+                    Console.Clear();
+                    Screen.PrintBoard(Game1.Brd);
 
-                Console.WriteLine();
-                Console.Write("Enter the origin position: ");
-                Position origin = Screen.ReadPositionChess().ToPosition();
-                Console.Write("Enter the destiny position: ");
-                Position destiny = Screen.ReadPositionChess().ToPosition();
+                    Console.WriteLine();
+                    Console.WriteLine("Turn: " + Game1.Turn + " Player: " + Game1.CurrentPlayer);
+                    Console.Write("Enter the origin position: ");
+                    Position origin = Screen.ReadPositionChess().ToPosition();
+                    Game1.ValidatePosition(origin);
 
-                Game1.MovePiece(origin, destiny);
+                    bool[,] PossiblePositions = Game1.Brd.Piece(origin).PosibleMoves();
+
+                    Console.Clear();
+                    Screen.PrintBoard(Game1.Brd, PossiblePositions);
+
+                    Console.WriteLine();
+                    Console.WriteLine("Turn: " + Game1.Turn + " Player: " + Game1.CurrentPlayer);
+                    Console.Write("Enter the destiny position: ");
+                    Position destiny = Screen.ReadPositionChess().ToPosition();
+                    Game1.ValidateMove(origin, destiny);
+
+                    Game1.ExecutePlay(origin, destiny);
+                } catch (BoardException e) {
+                    Console.WriteLine();
+                    Console.Write(e.Message + "\npress any key to continue...");
+                    Console.ReadKey();
+                }
+                
             }
             
 

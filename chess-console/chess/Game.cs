@@ -8,8 +8,8 @@ namespace chess
     class Game
     {
         public Board Brd { get; private set; }
-        private int Turn;
-        private Color CurrentPlayer;
+        public int Turn { get; private set; }
+        public Color CurrentPlayer { get; private set; }
         public bool Finished { get; private set; }
 
         public Game()
@@ -30,12 +30,46 @@ namespace chess
 
         }
 
-        private void PutPieces()
+        public void ExecutePlay(Position now, Position goTo) {
+            MovePiece(now, goTo);
+            Turn++;
+            ChangePlayer();
+
+        }
+
+        private void ChangePlayer() {
+            if (CurrentPlayer == Color.White) {
+                CurrentPlayer = Color.Black;
+            } else {
+                CurrentPlayer = Color.White;
+            }
+        }
+
+        public void ValidatePosition(Position pos) {
+            if (Brd.Piece(pos) == null) {
+                throw new BoardException("Cam´t find that piece");
+            }
+            if (CurrentPlayer != Brd.Piece(pos).Color) {
+                throw new BoardException("that isn't your piece");
+            }
+            if (!Brd.Piece(pos).ExistsPosibleMoves()) {
+                throw new BoardException("you can't move that piece");
+            }
+        }
+
+        public void ValidateMove(Position origin, Position destiny) {
+            if (!Brd.Piece(origin).CanMoveTo(destiny)) {
+                throw new BoardException("you can't move that piece to this destiny");
+            }
+        }
+
+
+            private void PutPieces()
         {
             Brd.SetPiece(new King(Color.Black, Brd), new PositionChess('c', 1).ToPosition());
-            Brd.SetPiece(new King(Color.Black, Brd), new PositionChess('g', 6).ToPosition());
+            Brd.SetPiece(new Tower(Color.Black, Brd), new PositionChess('g', 6).ToPosition());
             Brd.SetPiece(new King(Color.White, Brd), new PositionChess('f', 3).ToPosition());
-            Brd.SetPiece(new King(Color.White, Brd), new PositionChess('b', 4).ToPosition());
+            Brd.SetPiece(new Tower(Color.White, Brd), new PositionChess('b', 4).ToPosition());
         }
 
     }
