@@ -16,6 +16,7 @@ namespace chess_console
                 Console.Clear();
                 Screen.PrintBoard(Game1.Brd);
 
+                Console.WriteLine();
                 Console.Write("Enter the origin position: ");
                 Position origin = Screen.ReadPositionChess().ToPosition();
                 Console.Write("Enter the destiny position: ");

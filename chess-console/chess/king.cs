@@ -14,5 +14,19 @@ namespace chess
         {
             return "K";
         }
+        private bool CanMove(Position pos)
+        {
+            Piece p = Brd.Piece(pos);
+            return p == null || p.Color != Color;
+        }
+        public override bool[,] PosibleMoves()
+        {
+            bool[,] mat = new bool[Brd.Rows, Brd.Cols];
+
+            Position pos = new Position(0, 0);
+
+            //up
+
+        }
     }
 }

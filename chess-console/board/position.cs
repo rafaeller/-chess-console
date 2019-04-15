@@ -14,6 +14,11 @@ namespace board
             Row = row;
             Col = col;
         }
+        public void DefineValues(int row, int col)
+        {
+            Row = row;
+            Col = col;
+        }
         public override string ToString()
         {
             return "" + Col + Row;
